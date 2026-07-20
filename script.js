@@ -1,228 +1,174 @@
 // ===============================
-// ONLINE SOLUTION
-// Professional Script
+// LOADER
 // ===============================
 
-// Search Services
+window.addEventListener("load", function () {
 
-const searchBox = document.getElementById("searchBox");
+document.getElementById("loader").style.display = "none";
 
-if (searchBox) {
+});
 
-searchBox.addEventListener("keyup", function () {
+// ===============================
+// CURRENT YEAR
+// ===============================
 
-let filter = searchBox.value.toUpperCase();
+document.getElementById("year").innerHTML = new Date().getFullYear();
 
-let cards = document.querySelectorAll(".card");
+// ===============================
+// BACK TO TOP
+// ===============================
 
-cards.forEach(function(card){
+const topBtn = document.getElementById("topBtn");
 
-let title = card.querySelector("h3");
+window.onscroll = function () {
 
-if(title){
+if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
 
-let text = title.innerText.toUpperCase();
+topBtn.style.display = "block";
 
-if(text.indexOf(filter) > -1){
+} else {
 
-card.style.display = "";
+topBtn.style.display = "none";
 
-}else{
+}
 
-card.style.display = "none";
+};
+
+topBtn.onclick = function () {
+
+window.scrollTo({
+
+top: 0,
+
+behavior: "smooth"
+
+});
+
+};
+
+// ===============================
+// DARK MODE
+// ===============================
+
+const darkBtn = document.getElementById("darkMode");
+
+darkBtn.onclick = function () {
+
+document.body.classList.toggle("dark");
+
+};
+
+// ===============================
+// TYPING EFFECT
+// ===============================
+
+const text = "WELCOME TO ONLINE SOLUTION";
+
+let i = 0;
+
+function typing() {
+
+if (i < text.length) {
+
+document.getElementById("typing").innerHTML += text.charAt(i);
+
+i++;
+
+setTimeout(typing, 100);
 
 }
 
 }
 
-});
+typing();
+// ===================================
+// MOBILE MENU
+// ===================================
+
+const menuToggle = document.querySelector(".menu-toggle");
+const nav = document.querySelector("nav");
+
+menuToggle.addEventListener("click", () => {
+
+nav.classList.toggle("show");
 
 });
 
-}
-
-// Smooth Scroll
-
-document.querySelectorAll("a[href^='#']").forEach(anchor=>{
-
-anchor.addEventListener("click",function(e){
-
-e.preventDefault();
-
-document.querySelector(this.getAttribute("href")).scrollIntoView({
-
-behavior:"smooth"
-
-});
-
-});
-
-});
-
-// Card Animation
-
-const cards=document.querySelectorAll(".card");
-
-cards.forEach((card,index)=>{
-
-card.style.opacity="0";
-
-card.style.transform="translateY(40px)";
-
-setTimeout(()=>{
-
-card.style.transition="0.5s";
-
-card.style.opacity="1";
-
-card.style.transform="translateY(0)";
-
-},index*100);
-
-});
-
-// Button Hover Animation
-
-document.querySelectorAll(".btn").forEach(btn=>{
-
-btn.addEventListener("mouseenter",()=>{
-
-btn.style.transform="scale(1.05)";
-
-});
-
-btn.addEventListener("mouseleave",()=>{
-
-btn.style.transform="scale(1)";
-
-});
-
-});
-
-// Current Year in Footer (Optional)
-
-const year=document.getElementById("year");
-
-if(year){
-
-year.innerHTML=new Date().getFullYear();
-
-}
-
-console.log("ONLINE SOLUTION Website Loaded Successfully");
-// ===========================
-// IMAGE SLIDER
-// ===========================
-
-let slideIndex = 0;
+// ===================================
+// AUTO IMAGE SLIDER
+// ===================================
 
 const slides = document.querySelectorAll(".slide");
 
-const nextBtn = document.querySelector(".next");
-
-const prevBtn = document.querySelector(".prev");
+let currentSlide = 0;
 
 function showSlide(index){
 
-slides.forEach(slide=>{
+slides.forEach((slide)=>{
 
 slide.classList.remove("active");
 
 });
 
-if(index>=slides.length){
-
-slideIndex=0;
-
-}
-
-if(index<0){
-
-slideIndex=slides.length-1;
-
-}
-
-slides[slideIndex].classList.add("active");
+slides[index].classList.add("active");
 
 }
 
 function nextSlide(){
 
-slideIndex++;
+currentSlide++;
 
-showSlide(slideIndex);
+if(currentSlide>=slides.length){
+
+currentSlide=0;
+
+}
+
+showSlide(currentSlide);
 
 }
 
-function prevSlide(){
+setInterval(nextSlide,4000);
 
-slideIndex--;
+// ===================================
+// PREVIOUS / NEXT BUTTON
+// ===================================
 
-showSlide(slideIndex);
+const nextBtn=document.querySelector(".next");
 
-}
+const prevBtn=document.querySelector(".prev");
 
 if(nextBtn){
 
-nextBtn.onclick=nextSlide;
+nextBtn.addEventListener("click",()=>{
+
+nextSlide();
+
+});
 
 }
 
 if(prevBtn){
 
-prevBtn.onclick=prevSlide;
+prevBtn.addEventListener("click",()=>{
+
+currentSlide--;
+
+if(currentSlide<0){
+
+currentSlide=slides.length-1;
 
 }
 
-// Auto Slider
-
-setInterval(()=>{
-
-slideIndex++;
-
-showSlide(slideIndex);
-
-},4000);
-
-showSlide(slideIndex);
-// ==========================
-// LOADER
-// ==========================
-
-// ==========================
-// BACK TO TOP
-// ==========================
-
-const topBtn=document.getElementById("topBtn");
-
-window.onscroll=function(){
-
-if(document.documentElement.scrollTop>300){
-
-topBtn.style.display="block";
-
-}else{
-
-topBtn.style.display="none";
-
-}
-
-};
-
-topBtn.onclick=function(){
-
-window.scrollTo({
-
-top:0,
-
-behavior:"smooth"
+showSlide(currentSlide);
 
 });
 
-};
-// ==========================
+}
+
+// ===================================
 // IMAGE POPUP
-// ==========================
+// ===================================
 
 const popup=document.getElementById("imagePopup");
 
@@ -230,27 +176,23 @@ const popupImg=document.getElementById("popupImage");
 
 const closePopup=document.querySelector(".closePopup");
 
-document.querySelectorAll(".card img").forEach(img=>{
+document.querySelectorAll("img").forEach(img=>{
 
-img.addEventListener("click",function(){
+img.addEventListener("click",()=>{
 
 popup.style.display="flex";
 
-popupImg.src=this.src;
+popupImg.src=img.src;
 
 });
 
 });
-
-if(closePopup){
 
 closePopup.onclick=function(){
 
 popup.style.display="none";
 
 };
-
-}
 
 window.onclick=function(e){
 
@@ -261,104 +203,119 @@ popup.style.display="none";
 }
 
 };
-// ==========================
-// MOBILE MENU
-// ==========================
 
-const menuBtn=document.querySelector(".menu-toggle");
+// ===================================
+// SEARCH FILTER
+// ===================================
 
-const nav=document.querySelector("nav");
+const search=document.getElementById("searchBox");
 
-if(menuBtn){
+if(search){
 
-menuBtn.onclick=function(){
+search.addEventListener("keyup",function(){
 
-nav.classList.toggle("active");
+let value=this.value.toLowerCase();
 
-};
+document.querySelectorAll(".service-card").forEach(card=>{
 
-}
-// ==========================
-// DARK MODE
-// ==========================
+let text=card.innerText.toLowerCase();
 
-const dark=document.getElementById("darkMode");
+card.style.display=text.includes(value)?"block":"none";
 
-if(dark){
+});
 
-dark.onclick=function(){
-
-document.body.classList.toggle("dark");
-
-};
+});
 
 }
-// ===============================
-// ANIMATED COUNTER
-// ===============================
+// ==========================================
+// COUNTER ANIMATION
+// ==========================================
 
 const counters = document.querySelectorAll(".counter");
 
-counters.forEach(counter=>{
+const speed = 100;
 
-counter.innerText="0";
+counters.forEach(counter => {
 
-const updateCounter=()=>{
+const update = () => {
 
-const target=+counter.getAttribute("data-target");
+const target = +counter.getAttribute("data-target");
 
-const count=+counter.innerText;
+const count = +counter.innerText;
 
-const increment=target/100;
+const inc = Math.ceil(target / speed);
 
-if(count<target){
+if (count < target) {
 
-counter.innerText=Math.ceil(count+increment);
+counter.innerText = count + inc;
 
-setTimeout(updateCounter,20);
+setTimeout(update, 20);
 
-}else{
+} else {
 
-if(target==5000){
-
-counter.innerText="5000+";
-
-}
-
-else if(target==20){
-
-counter.innerText="20+";
-
-}
-
-else if(target==5){
-
-counter.innerText="5+";
-
-}
-
-else if(target==100){
-
-counter.innerText="100%";
-
-}
+counter.innerText = target;
 
 }
 
 };
 
-updateCounter();
+update();
 
 });
-// ===============================
+
+// ==========================================
+// SMOOTH SCROLL
+// ==========================================
+
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+
+anchor.addEventListener("click", function(e) {
+
+e.preventDefault();
+
+const target = document.querySelector(this.getAttribute("href"));
+
+if (target) {
+
+target.scrollIntoView({
+
+behavior: "smooth"
+
+});
+
+}
+
+});
+
+});
+
+// ==========================================
+// ACTIVE MENU
+// ==========================================
+
+const links = document.querySelectorAll("nav a");
+
+links.forEach(link => {
+
+link.addEventListener("click", function() {
+
+links.forEach(l => l.classList.remove("active"));
+
+this.classList.add("active");
+
+});
+
+});
+
+// ==========================================
 // SCROLL ANIMATION
-// ===============================
+// ==========================================
 
-const observer=new IntersectionObserver(entries=>{
+const observer = new IntersectionObserver(entries => {
 
-entries.forEach(entry=>{
+entries.forEach(entry => {
 
-if(entry.isIntersecting){
+if (entry.isIntersecting) {
 
 entry.target.classList.add("show");
 
@@ -368,49 +325,46 @@ entry.target.classList.add("show");
 
 });
 
-document.querySelectorAll("section").forEach(sec=>{
+document.querySelectorAll(
 
-sec.classList.add("hidden");
+".card,.service-card,.why-box,.review-card,.stat-box,.info-box"
 
-observer.observe(sec);
+).forEach(el => {
+
+observer.observe(el);
 
 });
-// ===============================
-// TYPING EFFECT
-// ===============================
 
-const text = "ONLINE SOLUTION";
+// ==========================================
+// HEADER SHADOW
+// ==========================================
 
-let i = 0;
+window.addEventListener("scroll", () => {
 
-function typing() {
+const header = document.querySelector("header");
 
-    const typingElement = document.getElementById("typing");
+if (window.scrollY > 50) {
 
-    if (typingElement && i < text.length) {
+header.classList.add("sticky");
 
-        typingElement.innerHTML += text.charAt(i);
+} else {
 
-        i++;
-
-        setTimeout(typing, 120);
-
-    }
+header.classList.remove("sticky");
 
 }
 
-typing();
-// ===============================
+});
 
-    updateCounter();
+// ==========================================
+// PREVENT IMAGE DRAG
+// ==========================================
+
+document.querySelectorAll("img").forEach(img => {
+
+img.draggable = false;
 
 });
-// ===============================
-// AUTO YEAR
-// ===============================
 
-const year = document.getElementById("year");
-
-if (year) {
-    year.textContent = new Date().getFullYear();
-}
+// ==========================================
+// END
+// ==========================================
