@@ -1514,3 +1514,30 @@ height:120px;
 resize:none;
 
 }
+.payment{
+
+text-align:center;
+
+padding:40px 20px;
+
+background:#f5f5f5;
+
+}
+
+
+.payment h2{
+
+font-size:30px;
+
+margin-bottom:10px;
+
+}
+
+
+.payment p{
+
+margin-bottom:20px;
+
+font-size:18px;
+
+}
