@@ -1581,3 +1581,33 @@ background:white;
 margin-bottom:10px;
 
 }
+/* Service Images Size Fix */
+
+.service-card img,
+.card img{
+
+width:120px;
+
+height:120px;
+
+object-fit:contain;
+
+margin:auto;
+
+display:block;
+
+}
+
+
+.service-card{
+
+text-align:center;
+
+}
+
+
+.card{
+
+text-align:center;
+
+}
