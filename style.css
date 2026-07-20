@@ -1611,3 +1611,10 @@ text-align:center;
 text-align:center;
 
 }
+*{
+scroll-behavior:smooth;
+}
+
+img{
+max-width:100%;
+}
