@@ -1468,3 +1468,49 @@ box-shadow:0 4px 10px rgba(0,0,0,0.3);
 transform:scale(1.1);
 
 }
+.booking{
+
+padding:50px 20px;
+
+text-align:center;
+
+}
+
+
+.booking-box{
+
+max-width:500px;
+
+margin:auto;
+
+display:flex;
+
+flex-direction:column;
+
+gap:15px;
+
+}
+
+
+.booking input,
+.booking select,
+.booking textarea{
+
+padding:15px;
+
+border-radius:10px;
+
+border:1px solid #ddd;
+
+font-size:16px;
+
+}
+
+
+.booking textarea{
+
+height:120px;
+
+resize:none;
+
+}

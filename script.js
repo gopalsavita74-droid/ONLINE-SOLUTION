@@ -368,3 +368,28 @@ img.draggable = false;
 // ==========================================
 // END
 // ==========================================
+function sendWhatsApp(){
+
+let name=document.getElementById("name").value;
+
+let mobile=document.getElementById("mobile").value;
+
+let service=document.getElementById("service").value;
+
+let message=document.getElementById("message").value;
+
+
+let text =
+"Hello ONLINE SOLUTION%0A%0A"+
+"Name: "+name+
+"%0AMobile: "+mobile+
+"%0AService: "+service+
+"%0AMessage: "+message;
+
+
+window.open(
+"https://wa.me/919140202287?text="+text,
+"_blank"
+);
+
+}
