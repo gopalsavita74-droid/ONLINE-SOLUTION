@@ -42,9 +42,7 @@ window.addEventListener("scroll", function () {
 
 });
 
-if (topBtn) {
 
- if (topBtn) {
 
  if (topBtn) {
     topBtn.addEventListener("click", function () {
