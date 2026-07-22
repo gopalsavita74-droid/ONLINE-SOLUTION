@@ -52,6 +52,7 @@ window.addEventListener("scroll", function () {
         });
     });
 }
+
 // ===============================
 // DARK MODE
 // ===============================
@@ -59,8 +60,6 @@ window.addEventListener("scroll", function () {
 const darkBtn = document.getElementById("darkMode");
 
 if (darkBtn) {
-
-  if (darkBtn) {
     darkBtn.addEventListener("click", function () {
         document.body.classList.toggle("dark");
     });
@@ -498,9 +497,7 @@ servicePopup.style.display="none";
 
 });
 
-// ===============================
 // SERVICE WORKER
-// ===============================
 
 if("serviceWorker" in navigator){
 
@@ -516,8 +513,4 @@ navigator.serviceWorker.register("/sw.js")
 
 // ===============================
 // END
-<<<<<<< HEAD
 // ===============================
-=======
-// ===============================
->>>>>>> 0afac76720a348727a269a903634c3a044c242de
