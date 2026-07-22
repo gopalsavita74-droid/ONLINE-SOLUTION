@@ -1686,3 +1686,9 @@ font-size:28px;
 cursor:pointer;
 font-weight:bold;
 }
+.service-card{
+    display:block;
+    text-decoration:none;
+    color:inherit;
+    cursor:pointer;
+}

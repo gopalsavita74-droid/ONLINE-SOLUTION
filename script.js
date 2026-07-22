@@ -566,3 +566,34 @@ if ("serviceWorker" in navigator) {
 // ===============================
 // END
 // ===============================
+// ===============================
+// WHATSAPP BUTTONS
+// ===============================
+
+const WHATSAPP_NUMBER = "919140202287";
+
+// सभी WhatsApp बटन पर काम करेगा
+document.querySelectorAll(".whatsapp-btn").forEach(btn => {
+
+    btn.addEventListener("click", function (e) {
+
+        e.preventDefault();
+
+        const service = this.dataset.service || "Online Service";
+
+        const message =
+`Hello ONLINE SOLUTION,
+
+I want information about:
+${service}
+
+Please contact me.`;
+
+        window.open(
+            `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`,
+            "_blank"
+        );
+
+    });
+
+});
