@@ -74,7 +74,6 @@ const typingElement = document.getElementById("typing");
 if (typingElement) {
 
   const text = "WELCOME TO ONLINE SOLUTION";
-
   let i = 0;
 
   function typing() {
