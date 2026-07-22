@@ -74,8 +74,7 @@ const typingElement = document.getElementById("typing");
 if (typingElement) {
 
   const text = "WELCOME TO ONLINE SOLUTION";
-  let i = 0;
-
+let i = 0;
   function typing() {
 
     if (i < text.length) {
@@ -517,4 +516,8 @@ navigator.serviceWorker.register("/sw.js")
 
 // ===============================
 // END
+<<<<<<< HEAD
 // ===============================
+=======
+// ===============================
+>>>>>>> 0afac76720a348727a269a903634c3a044c242de
