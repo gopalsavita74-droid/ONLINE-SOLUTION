@@ -347,9 +347,6 @@ function sendWhatsApp() {
 // ===============================
 // SEARCH FILTER
 // ===============================
-
-const searchBox = document.getElementById("searchBox");
-
 if (searchBox) {
     searchBox.addEventListener("keyup", function () {
         const value = this.value.toLowerCase();
