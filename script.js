@@ -508,7 +508,7 @@ const serviceData = {
 document.querySelectorAll(".service-card").forEach(card => {
 
     card.style.cursor = "pointer";
-
+    .then(()=>console.log("Service Worker Registered"))
     card.addEventListener("click", function () {
 
         const title = this.querySelector("h3")?.innerText;
