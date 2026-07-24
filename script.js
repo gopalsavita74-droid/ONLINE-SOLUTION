@@ -386,43 +386,41 @@ servicePopup.style.display="none";
 // SERVICE WORKER
 // ===================================
 
-if("serviceWorker" in navigator){
+if ("serviceWorker" in navigator) {
 
-window.addEventListener("load",function(){
+    window.addEventListener("load", function () {
 
-navigator.serviceWorker.register("service-worker.js")
+        navigator.serviceWorker.register("./sw.js")
 
-.then(function(){
+            .then(function () {
 
-console.log("✅ Service Worker Registered");
+                console.log("✅ Service Worker Registered");
 
-})
+            })
 
-.catch(function(error){
+            .catch(function (error) {
 
-console.log(error);
+                console.log(error);
 
-});
+            });
 
-});
-
-}
-
-// ===================================
-// SCROLL ANIMATION
-// ===================================
-
-const observer=new IntersectionObserver(function(entries){
-
-entries.forEach(function(entry){
-
-if(entry.isIntersecting){
-
-entry.target.classList.add("show");
+    });
 
 }
 
-});
+if (closeService) {
+
+    closeService.addEventListener("click", function () {
+        servicePopup.style.display = "none";
+    });
+
+}
+
+window.addEventListener("click", function (e) {
+
+    if (e.target === servicePopup) {
+        servicePopup.style.display = "none";
+    }
 
 });
 
@@ -430,9 +428,9 @@ document.querySelectorAll(
 
 ".service-card,.why-box,.review-card,.info-box,.counter-box"
 
-).forEach(function(el){
+).forEach(function (el) {
 
-observer.observe(el);
+    observer.observe(el);
 
 });
 
