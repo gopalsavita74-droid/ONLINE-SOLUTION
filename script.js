@@ -1,9 +1,10 @@
-// =====================================
+// ===================================
 // ONLINE SOLUTION SCRIPT
-// =====================================
+// ===================================
 
 // LOADER
-window.addEventListener("load", () => {
+
+window.addEventListener("load",function(){
 
 const loader=document.getElementById("loader");
 
@@ -35,7 +36,7 @@ document.body.classList.toggle("dark");
 
 }
 
-// MENU
+// MOBILE MENU
 
 const menu=document.querySelector(".menu-toggle");
 
@@ -51,31 +52,31 @@ nav.classList.toggle("show");
 
 }
 
-// TYPING
+// TYPING EFFECT
 
 const typing=document.getElementById("typing");
 
 if(typing){
 
-const txt="WELCOME TO ONLINE SOLUTION";
+const text="WELCOME TO ONLINE SOLUTION";
 
 let i=0;
 
-function type(){
+function typingEffect(){
 
-if(i<txt.length){
+if(i<text.length){
 
-typing.innerHTML+=txt.charAt(i);
+typing.innerHTML+=text.charAt(i);
 
 i++;
 
-setTimeout(type,70);
+setTimeout(typingEffect,70);
 
 }
 
 }
 
-type();
+typingEffect();
 
 }
 
@@ -83,7 +84,7 @@ type();
 
 const topBtn=document.getElementById("topBtn");
 
-window.addEventListener("scroll",()=>{
+window.addEventListener("scroll",function(){
 
 if(!topBtn)return;
 
@@ -114,9 +115,9 @@ behavior:"smooth"
 };
 
 }
-// =====================================
+// ===================================
 // SLIDER
-// =====================================
+// ===================================
 
 const slides=document.querySelectorAll(".slide");
 
@@ -126,7 +127,7 @@ function showSlide(index){
 
 if(slides.length===0)return;
 
-slides.forEach(slide=>{
+slides.forEach(function(slide){
 
 slide.classList.remove("active");
 
@@ -192,9 +193,9 @@ prev.onclick=prevSlide;
 
 }
 
-// =====================================
+// ===================================
 // SEARCH
-// =====================================
+// ===================================
 
 const search=document.getElementById("searchBox");
 
@@ -204,14 +205,17 @@ search.addEventListener("keyup",function(){
 
 const value=this.value.toLowerCase();
 
-document.querySelectorAll(".service-card").forEach(card=>{
+document.querySelectorAll(".service-card").forEach(function(card){
 
-card.style.display=
-card.innerText.toLowerCase().includes(value)
-?
-"block"
-:
-"none";
+if(card.innerText.toLowerCase().includes(value)){
+
+card.style.display="block";
+
+}else{
+
+card.style.display="none";
+
+}
 
 });
 
@@ -219,27 +223,29 @@ card.innerText.toLowerCase().includes(value)
 
 }
 
-// =====================================
+// ===================================
 // COUNTER
-// =====================================
+// ===================================
 
-document.querySelectorAll(".counter").forEach(counter=>{
+const counters=document.querySelectorAll(".counter");
 
-const target=+counter.dataset.target;
+counters.forEach(function(counter){
+
+const target=Number(counter.dataset.target);
 
 let count=0;
 
-function update(){
+function updateCounter(){
 
-const inc=Math.ceil(target/100);
+const increment=Math.ceil(target/100);
 
-count+=inc;
+count+=increment;
 
 if(count<target){
 
 counter.innerHTML=count;
 
-requestAnimationFrame(update);
+requestAnimationFrame(updateCounter);
 
 }else{
 
@@ -249,88 +255,82 @@ counter.innerHTML=target;
 
 }
 
-update();
+updateCounter();
 
 });
-// =====================================
-// IMAGE POPUP
-// =====================================
+// ===================================
+// WHATSAPP ENQUIRY
+// ===================================
 
-const imagePopup=document.getElementById("imagePopup");
-const popupImage=document.getElementById("popupImage");
+function sendWhatsApp(){
+
+const name=document.getElementById("name").value;
+const mobile=document.getElementById("mobile").value;
+const service=document.getElementById("service").value;
+const message=document.getElementById("message").value;
+
+const text=
+"Hello ONLINE SOLUTION%0A%0A"+
+"Name : "+name+"%0A"+
+"Mobile : "+mobile+"%0A"+
+"Service : "+service+"%0A"+
+"Message : "+message;
+
+window.open(
+"https://wa.me/919140202287?text="+text,
+"_blank"
+);
+
+}
+
+// ===================================
+// IMAGE POPUP
+// ===================================
+
+const popup=document.getElementById("imagePopup");
+const popupImg=document.getElementById("popupImage");
 const closePopup=document.querySelector(".closePopup");
 
-if(imagePopup && popupImage){
-
-document.querySelectorAll("img").forEach(img=>{
+document.querySelectorAll("img").forEach(function(img){
 
 img.addEventListener("click",function(){
 
-popupImage.src=this.src;
+if(!popup)return;
 
-imagePopup.style.display="flex";
+popup.style.display="flex";
+popupImg.src=this.src;
 
 });
 
 });
-
-}
 
 if(closePopup){
 
 closePopup.onclick=function(){
 
-imagePopup.style.display="none";
+popup.style.display="none";
 
 };
 
 }
 
-window.addEventListener("click",function(e){
+if(popup){
 
-if(e.target===imagePopup){
+popup.onclick=function(e){
 
-imagePopup.style.display="none";
+if(e.target===popup){
 
-}
-
-});
-
-// =====================================
-// WHATSAPP FORM
-// =====================================
-
-function sendWhatsApp(){
-
-const name=document.getElementById("name")?.value||"";
-
-const mobile=document.getElementById("mobile")?.value||"";
-
-const service=document.getElementById("service")?.value||"";
-
-const message=document.getElementById("message")?.value||"";
-
-const text=
-`Hello ONLINE SOLUTION
-
-Name : ${name}
-Mobile : ${mobile}
-Service : ${service}
-Message : ${message}`;
-
-window.open(
-
-"https://wa.me/919140202287?text="+encodeURIComponent(text),
-
-"_blank"
-
-);
+popup.style.display="none";
 
 }
 
-// =====================================
+};
+
+}
+
+// ===================================
 // SERVICE POPUP
-// =====================================
+// ===================================
 
 const servicePopup=document.getElementById("servicePopup");
 
@@ -340,79 +340,31 @@ const popupDescription=document.getElementById("popupDescription");
 
 const popupWhatsapp=document.getElementById("popupWhatsapp");
 
-const closeService=document.querySelector("#servicePopup .close");
+const close=document.querySelector(".close");
 
-const serviceData={
-
-"PAN Card":{
-desc:"New PAN Card, Correction, e-PAN Download.",
-msg:"Hello, I want PAN Card Service."
-},
-
-"Aadhaar Service":{
-desc:"Aadhaar Update, Download & Mobile Update.",
-msg:"Hello, I want Aadhaar Service."
-},
-
-"Passport Seva":{
-desc:"New Passport & Renewal.",
-msg:"Hello, I want Passport Service."
-},
-
-"Driving Licence":{
-desc:"Learning & Permanent Driving Licence.",
-msg:"Hello, I want Driving Licence Service."
-},
-
-"GST Registration":{
-desc:"GST Registration & Return Filing.",
-msg:"Hello, I want GST Registration."
-},
-
-"ITR Filing":{
-desc:"Income Tax Return Filing.",
-msg:"Hello, I want ITR Filing."
-},
-
-"Railway Ticket":{
-desc:"IRCTC Railway Ticket Booking.",
-msg:"Hello, I want Railway Ticket."
-},
-
-"Flight Ticket":{
-desc:"Domestic & International Flight Ticket Booking.",
-msg:"Hello, I want Flight Ticket."
-}
-
-};
-
-document.querySelectorAll(".service-card").forEach(card=>{
+document.querySelectorAll(".service-card").forEach(function(card){
 
 card.addEventListener("click",function(e){
 
-const title=this.querySelector("h3")?.innerText;
-
-if(serviceData[title] && servicePopup){
+if(this.tagName==="A") return;
 
 e.preventDefault();
 
-popupTitle.innerText=title;
+popupTitle.innerHTML=this.querySelector("h3").innerText;
 
-popupDescription.innerText=serviceData[title].desc;
+popupDescription.innerHTML=this.querySelector("p").innerText;
 
-popupWhatsapp.href="https://wa.me/919140202287?text="+encodeURIComponent(serviceData[title].msg);
+popupWhatsapp.href="https://wa.me/919140202287?text=Hello ONLINE SOLUTION, I want "+encodeURIComponent(this.querySelector("h3").innerText);
 
 servicePopup.style.display="flex";
 
-}
-
 });
 
 });
 
-if(closeService){
+if(close){
 
-closeService.onclick=function(){
+close.onclick=function(){
 
 servicePopup.style.display="none";
 
@@ -420,7 +372,7 @@ servicePopup.style.display="none";
 
 }
 
-window.addEventListener("click",function(e){
+window.onclick=function(e){
 
 if(e.target===servicePopup){
 
@@ -428,52 +380,60 @@ servicePopup.style.display="none";
 
 }
 
-});
+};
 
-// =====================================
-// SMOOTH SCROLL
-// =====================================
-
-document.querySelectorAll('a[href^="#"]').forEach(anchor=>{
-
-anchor.addEventListener("click",function(e){
-
-e.preventDefault();
-
-const target=document.querySelector(this.getAttribute("href"));
-
-if(target){
-
-target.scrollIntoView({
-
-behavior:"smooth"
-
-});
-
-}
-
-});
-
-});
-
-// =====================================
+// ===================================
 // SERVICE WORKER
-// =====================================
+// ===================================
 
 if("serviceWorker" in navigator){
 
-window.addEventListener("load",()=>{
+window.addEventListener("load",function(){
 
-navigator.serviceWorker.register("./sw.js")
+navigator.serviceWorker.register("service-worker.js")
 
-.then(()=>console.log("✅ Service Worker Registered"))
+.then(function(){
 
-.catch(err=>console.log(err));
+console.log("✅ Service Worker Registered");
+
+})
+
+.catch(function(error){
+
+console.log(error);
+
+});
 
 });
 
 }
 
-// =====================================
-// END
-// =====================================
+// ===================================
+// SCROLL ANIMATION
+// ===================================
+
+const observer=new IntersectionObserver(function(entries){
+
+entries.forEach(function(entry){
+
+if(entry.isIntersecting){
+
+entry.target.classList.add("show");
+
+}
+
+});
+
+});
+
+document.querySelectorAll(
+
+".service-card,.why-box,.review-card,.info-box,.counter-box"
+
+).forEach(function(el){
+
+observer.observe(el);
+
+});
+
+console.log("ONLINE SOLUTION Loaded Successfully");
